@@ -6,3 +6,17 @@
   background-color: #17d16b !important;
   color: #fff !important;
 }
+
+.greenHighlight {
+  color: green;
+  font-size: 24px;
+}
+
+.redHighlight {
+  color: red;
+  font-size: 24px;
+}
+
+.hand-icon {
+  cursor: pointer;
+}
