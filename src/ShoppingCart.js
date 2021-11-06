@@ -4,23 +4,16 @@ import Product from "./Product";
 export default class ShoppingCart extends Component {
   //execute when the component is mounted
   constructor(props) {
-    console.log("constructor-shopping cart");
+    // console.log("constructor-shopping cart");
     super(props); //calling the super class's constructor which is Component's constructor
     //initialization of the state
     this.state = {
-      products: [
-        { id: 1, productName: "iPhone", price: 309992, quantity: 0 },
-        // { id: 2, productName: "Samsung A20", price: 580092, quantity: 0 },
-        // { id: 3, productName: "Huawei", price: 967792, quantity: 0 },
-        // { id: 4, productName: "iPhone 11", price: 9992, quantity: 0 },
-        // { id: 5, productName: "Xiomi", price: 9555992, quantity: 0 },
-        // { id: 6, productName: "S2", price: 34455, quantity: 0 },
-      ],
+      products: [],
     };
   }
 
   render() {
-    console.log("render-shopping cart");
+    // console.log("render-shopping cart");
     return (
       <div className="container-fluid">
         <h1>Shopping Cart</h1>
@@ -43,22 +36,34 @@ export default class ShoppingCart extends Component {
     );
   }
 
-  componentDidMount() {
-    console.log("componentDidMount-shopping cart");
-  }
+  componentDidMount = async () => {
+    var response = await fetch("http://localhost:3000/products", {
+      method: "GET",
+    });
+    var prods = await response.json();
+    console.log(prods);
+    this.setState({ products: prods });
+    // console.log("componentDidMount-shopping cart");
+  };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(
-      "componentDidUpdate-shopping cart",
-      prevProps,
-      prevState,
-      this.props,
-      this.state
-    );
+    // console.log(
+    //   "componentDidUpdate-shopping cart",
+    //   prevProps,
+    //   prevState,
+    //   this.props,
+    //   this.state
+    // );
   }
 
   componentWillUnmount() {
-    console.log("componentWillUnmount-shopping cart");
+    // console.log("componentWillUnmount-shopping cart");
+  }
+
+  componentDidCatch(error, info) {
+    // console.log("componentDidCatch-shopping cart");
+    // console.log(error, info);
+    // localStorage.lastError = "${error}\n${JSON.stringify(info)}";
   }
 
   handleIncrement = (product, maxValue) => {
